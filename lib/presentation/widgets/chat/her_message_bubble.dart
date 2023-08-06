@@ -21,7 +21,6 @@ class HerMessageBubble extends StatelessWidget {
           )
         ),
         const SizedBox(height: 5),
-        //Todo: image
         _ImageBubble(),
         const SizedBox(height: 10)
       ]
@@ -30,7 +29,6 @@ class HerMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,7 +39,17 @@ class _ImageBubble extends StatelessWidget {
         'https://yesno.wtf/assets/yes/5-64c2804cc48057b94fd0b3eaf323d92c.gif',
         width: size.width * 0.7,
         height: 150,
-        fit: BoxFit.cover
+        fit: BoxFit.cover,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+
+          return Container(
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: const Text('Elizabeth está enviando una imagen')
+          );
+        }
       )
     );
   }
